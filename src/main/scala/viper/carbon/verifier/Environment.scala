@@ -37,9 +37,11 @@ case class Environment(verifier: Verifier, member: sil.Node) {
       for (v <- args) {
         define(v.localVar)
       }
-    case f@sil.DomainFunc(name, args, typ, unique) =>
-      for (v <- args) {
-        define(v.localVar)
+    case f@sil.DomainFunc(name, args, typ, unique, backendVersion) =>
+      if (!backendVersion.isDefined){
+        for (v <- args) {
+          define(v.localVar)
+        }
       }
     case _ =>
   }

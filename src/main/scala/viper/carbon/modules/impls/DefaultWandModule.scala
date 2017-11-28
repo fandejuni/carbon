@@ -107,7 +107,7 @@ DefaultWandModule(val verifier: Verifier) extends WandModule {
 
 
   override def preamble = wandToShapes.values.collect({
-    case fun@Func(name,args,typ) =>
+    case fun@Func(name,args,typ, attrs) =>
       val vars = args.map(decl => decl.l)
       val f0 = FuncApp(name,vars,typ)
       val typeDecl: Seq[TypeDecl] = heapModule.wandBasicType(name.preferredName) match {
@@ -135,7 +135,7 @@ DefaultWandModule(val verifier: Verifier) extends WandModule {
     val shape:WandShape = wandToShapes(wand.structure(mainModule.verifier.program))
 
     shape match {
-      case Func(name, _, typ) => FuncApp(name, arguments.map(arg => expModule.translateExp(arg)), typ)
+      case Func(name, _, typ, _) => FuncApp(name, arguments.map(arg => expModule.translateExp(arg)), typ)
     }
   }
 

@@ -44,8 +44,12 @@ class DefaultDomainModule(val verifier: Verifier) extends DomainModule with Stat
       val func = ConstDecl(Identifier(f.name), t, unique = true)
       MaybeCommentedDecl(s"Translation of domain unique function ${f.name}", func, size = 1)
     } else {
+      var attributes: Map[String, String] = Map()
+      if (f.smtName.isDefined){
+        attributes += "builtin" -> f.smtName.get
+      }
       val args = f.formalArgs map (x => LocalVarDecl(Identifier(x.name), translateType(x.typ)))
-      val func = Func(Identifier(f.name), args, t)
+      val func = Func(Identifier(f.name), args, t, attributes)
       MaybeCommentedDecl(s"Translation of domain function ${f.name}", func, size = 1)
     }
     env = null

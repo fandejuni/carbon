@@ -26,6 +26,8 @@ class DefaultTypeModule(val verifier: Verifier) extends TypeModule with Stateles
   def name = "Type module"
   override def translateType(t: sil.Type): Type = {
     t match {
+      case sil.BackendType(boogieName, _) =>
+        NamedType(boogieName.get, Seq())
       case sil.Bool =>
         Bool
       case sil.Int =>
