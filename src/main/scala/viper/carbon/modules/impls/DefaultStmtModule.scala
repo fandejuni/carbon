@@ -118,7 +118,9 @@ class DefaultStmtModule(val verifier: Verifier) extends StmtModule with SimpleSt
         }
       case mc@sil.MethodCall(methodName, args, targets) =>
         val method = verifier.program.findMethod(methodName)
-        if (verifier.staticInlining.isDefined && method.body.isDefined) {
+        if (mainModule.methodCallEncodesHavocHack(mc).isDefined) {
+          Seq()
+        } else if (verifier.staticInlining.isDefined && method.body.isDefined) {
           inliningModule.inlineMethod(method, args, targets)
         }
         else {

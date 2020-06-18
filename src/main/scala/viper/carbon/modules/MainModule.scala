@@ -45,4 +45,10 @@ trait MainModule extends Module {
     allAssumptionsAboutValue(arg.typ,translateLocalVarDecl(arg),isParameter)
   }
 
+  /**
+    * Return predicate if method call encodes a havoc (see Voila option "disableSiliconSpecificHavocking")
+    */
+  def methodCallEncodesHavocHack(m: sil.MethodCall) : Option[sil.Predicate]
+
+
 }
