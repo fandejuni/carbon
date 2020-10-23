@@ -81,6 +81,7 @@ trait Verifier {
   // def simpleWFM: Boolean
   def closureSC: Boolean
   def modularSC: Boolean
+  def useAnnot: Boolean
   def pureFunctionsSC: Boolean
   def noSyntacticCheck: Boolean
   def entry: Option[String]

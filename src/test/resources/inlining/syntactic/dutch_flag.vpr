@@ -2,7 +2,7 @@
 // LOC: 5 + 17 + 11
 // Annot: 4 + 6
 
-define ERROR (0)
+define ERROR (1)
 
 define RED 0
 define WHITE 1

@@ -143,6 +143,12 @@ class CarbonConfig(args: Seq[String]) extends SilFrontendConfig(args, "Carbon") 
     noshort = true
   )
 
+  val useAnnot = opt[Boolean]("useAnnot",
+    descr = "Takes into account the existing annotation to inline (as a lower bound on the possible annotation) (default: disabled)",
+    default = None,
+    noshort = true
+  )
+
   /*
   val simpleWFM = opt[Boolean]("simpleWFM",
     descr = "Computes a simpler (bounded) WFM, but potentially unsound (default: disabled)",

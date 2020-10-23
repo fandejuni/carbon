@@ -2,7 +2,7 @@
 Partial Viper encoding of https://github.com/verifast/verifast/blob/master/examples/composite5.c
 */
 
-define ERROR (0)
+define ERROR (2)
 // Modularly verifies in 20s
 // A. --entry client_get_parent --SI 2 / 3, 1
 // 0) 

@@ -2,7 +2,7 @@
  * See also http://verifythus.cost-ic0701.org/common-example/
  */
 
-define ERROR (0)
+define ERROR (1)
 
 // Total
 // LOC: 35

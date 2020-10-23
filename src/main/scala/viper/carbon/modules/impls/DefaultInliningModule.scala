@@ -1138,7 +1138,17 @@ class DefaultInliningModule(val verifier: Verifier) extends InliningModule with 
 
       currentRenaming = Map()
       inRenaming = Set()
-      val pre_body = m.body.get
+      val pre_pre_body: ast.Stmt = m.body.get
+
+      val pre_body: ast.Stmt =
+        if (verifier.useAnnot) {
+          val preconditions_asserted: Seq[sil.Assert] = m.pres.map(sil.Assert(_)(m.pos, m.info, m.errT))
+          sil.Seqn(preconditions_asserted ++ Seq(pre_pre_body), Seq())(m.pos, m.info, m.errT)
+        }
+        else {
+          pre_pre_body
+        }
+
       val body = alphaRename(pre_body)
       val renamedFormalArgsVars: Seq[ast.LocalVar] = (m.formalArgs map (_.localVar)) map renameVar
       val renamedFormalReturnsVars: Seq[ast.LocalVar] = ((m.formalReturns map (_.localVar))) map renameVar
